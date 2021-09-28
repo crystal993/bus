@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/jh.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+
+</head>
+<body>
+<div id="map" style="width:100%;height:350px;"></div>
+
+<table id="example-table-1" width="100%" border="1" class="table table-bordered table-hover text-center">
+    <tr><th>노선ID</th><td>{{bus.busRouteId}}</td></tr>
+    <tr><th>노선명</th><td>{{bus.busRouteNm}}</td></tr>
+    <tr><th>노선길이(km)</th><td>{{bus.length}}km</td></tr>
+    <tr><th>기점</th><td>{{bus.stStationNm}}</td></tr>
+    <tr><th>종점</th><td>{{bus.edStationNm}}</td></tr>
+    <tr><th>금일저상첫차시간</th><td>{{bus.firstBusTm}}</td></tr>
+    <tr><th>금일저상막차시간</th><td>{{bus.lastBusTm}}</td></tr>
+    <tr><th>배차간격</th><td>{{bus.term}}분</td></tr>
+    <tr><th>운수회사정보</th><td>{{bus.corpNm}}</td></tr>
+    <tr><th>노선유형</th><td>{{bus.routeType}}버스</td></tr>
+</table>
+<br>
+<a href="/">되돌아가기</a>
+</body>
+</html>

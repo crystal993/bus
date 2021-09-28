@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>명칭 별 교통약자전용 정류소 목록조회</h3>
+<table border="1">
+    <tr><th>정류소 ID</th><th>정류소명</th><th>정류소 좌표X</th><th>정류소 좌표Y</th><th>정류소고유번호</th><th>정류소 좌표X</th><th>정류소 좌표Y</th></tr>
+{% for s in st1 %}
+    <tr>
+        <td>{{s.stId}}</td>
+        <td>{{s.stNm}}</td>
+        <td>{{s.tmX}}</td>
+        <td>{{s.tmY}}</td>
+        <td>{{s.arsId}}</td>
+        <td>{{s.posX}}</td>
+        <td>{{s.posY}}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>

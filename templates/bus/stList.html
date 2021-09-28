@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+    <title>Title</title>
+    <script async src="//jsfiddle.net/jscodedev/ukqqvL9h/1/embed/"></script>
+    <!-- css -->
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/jh.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+
+</head>
+<body>
+<h3>{{routeid}} 노선의 경유 정류소</h3>
+<div id="map" style="width:100%;height:350px;"></div>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5a4d02a1d8eaf5daed584823dcae3470&libraries=services"></script>
+<table id="example-table-1" width="100%" border="1" class="table table-bordered table-hover text-center">
+    <tr><th>순번</th><th>정류소 고유번호</th><th>정류소명</th><th>첫차시간</th><th>막차시간</th><th>위치 X</th><th>위치 Y</th><th>진행방향</th></tr>
+{% for s in stList %}
+    <tr>
+        <td>{{s.seq}}</td>
+        <td>{{s.arsId}}</td>
+        <td>{{s.stationNm}}</td>
+        <td>{{s.beginTm}}</td>
+        <td>{{s.lastTm}}</td>
+        <td>{{s.gpsX}}</td>
+        <td>{{s.gpsY}}</td>
+        <td>{{s.direction}}</td>
+    </tr>
+<div name="gpsX" id="gpsX" style="display:none;">{{s.gpsX}}</div>
+<div name="gpsY" id="gpsY" style="display:none;">{{s.gpsY}}</div>
+{% endfor %}
+</table>
+
+
+
+<script>
+
+var Lat = document.getElementById("gpsY").innerText; //위도 37.4996343963
+Lat = Number(Lat);
+var Lng = document.getElementById("gpsX").innerText; //경도 126.8679976691
+Lng = Number(Lng);
+
+var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(Lat, Lng), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+};
+var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+
+// 마커가 표시될 위치입니다
+var markerPosition  = new kakao.maps.LatLng(Lat, Lng);
+
+var maker = new kakao.maps.Maker({
+    postion : markerPosition
+});
+
+marker.setMap(map);
+
+</script>
+
+<br>
+<a href="/">되돌아가기</a>
+</body>
+</html>

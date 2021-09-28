@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>노선정보</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.js') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/jh.css')}}">
+</head>
+<body style="width:80%; text-align:center; margin-left:auto; margin-right:auto;">
+<h3 style="display:inline-block; text-align:center;"><b>{{bus.route_id}}</b> 노선 정보</h3>
+<table id="example-table-1" width="100%" border="1" class="table table-bordered table-hover text-center">
+    <tr><th>노선 ID</th><td>{{bus.route_id}}</td></tr>
+    <tr><th>노선명</th><td>{{bus.bus_name}}</td></tr>
+    <tr><th>노선 길이</th><td>{{bus.length}} km</td></tr>
+    <tr><th>노선 유형</th><td>{{bus.routeType}}</td></tr>
+    <tr><th>기점</th><td>{{bus.st_station}}</td></tr>
+    <tr><th>종점</th><td>{{bus.ed_station}}</td></tr>
+    <tr><th>배차간격</th><td>{{bus.term}} 분</td></tr>
+    <tr><th>금일첫차시간</th><td>{{bus.first_tm}}</td></tr>
+    <tr><th>금일막차시간</th><td>{{bus.last_tm}}</td></tr>
+    <tr><th>운수사명</th><td>{{bus.corp_name}}</td></tr>
+</table>
+<a href="/">되돌아가기</a>
+</body>
+</html>

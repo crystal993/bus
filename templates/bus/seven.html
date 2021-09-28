@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>고유번호 별 정류소 항목조회</h3>
+<table border="1">
+    <tr><th>정류소 ID</th><th>정류소명</th><th>정류소 고유번호</th><th>노선ID</th><th>노선명</th><th>정류소 좌표X</th><th>정류소 좌표Y</th><th>정류소타입</th><th>첫차시간</th><th>막차시간</th><th>배차간격</th><th>노선유형</th><th>요청정류소순번</th></tr>
+{% for i in infos %}
+    <tr>
+        <td>{{i.stId}}</td>
+        <td>{{i.stNm}}</td>
+        <td>{{i.arsId}}</td>
+        <td>{{i.busRouteId}}</td>
+        <td>{{i.rtNm}}</td>
+        <td>{{i.gpsX}}</td>
+        <td>{{i.gpsY}}</td>
+        <td>{{i.stationTp}}</td>
+        <td>{{i.firstTm}}</td>
+        <td>{{i.lastTm}}</td>
+        <td>{{i.term}}</td>
+        <td>{{i.routeType}}</td>
+        <td>{{i.staOrd}}</td>
+    </tr>
+{% endfor %}
+</table>
+</body>
