@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <script async src="//jsfiddle.net/jscodedev/ukqqvL9h/1/embed/"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- css -->
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/jh.css')}}">
     <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/sj_busmap.css')}}">
+    <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='css/sj_modal.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.js') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
 
 </head>
-<body style="margin-top:30px; width:80%; text-align:center; margin-left:auto; margin-right:auto;">
+<body style="margin-top:30px; width:70%; text-align:center; margin-left:auto; margin-right:auto;">
 
 <!-- title -->
 <div class="title" style="margin-top:15px;">
@@ -52,7 +54,7 @@
 <div class="row" style="margin-top:30px;">
     <table id="example-table-1" border="1" class="table table-bordered table-hover text-center" style="text-align:center; width=80%;">
 
-    <tr><th>정류소 ID</th><th>정류소명</th><th>정류소번호</th></tr>
+    <tr style="text-align:center;"><th>정류소 ID</th><th>정류소명</th><th>정류소번호</th></tr>
     <tr>
         <td>{{lowStaionByUid[0].stId}}</td>
         <td id="stnNm">{{lowStaionByUid[0].stnNm}}</td>
@@ -61,12 +63,9 @@
 
     </table>
 
-    <table border="1"  class="table table-bordered table-hover text-center" style="text-align:center; width=80%;">
+    <table id="example-table-2" border="1"  class="table table-bordered table-hover text-center" style="text-align:center; width=80%;">
         <tr style="text-align:center;"><th>노선ID</th><th>버스 번호</th><th>첫차시간</th>
             <th>막차 시간</th><th>배차 간격</th>
-            <th>첫번째 도착예정버스의 최종보고시간</th>
-            <th>첫번째 도착예정 버스의 도착정보 메시지</th>
-            <th>두번째 도착 예정 버스의 도착정보 메시지</th>
         </tr>
     {% for s in lowStaionByUid %}
         <tr>
@@ -75,20 +74,88 @@
             <td>{{s.firstTm}}</td>
             <td>{{s.lastTm}}</td>
             <td>{{s.term}}</td>
-
-            <td>{{s.repTm1}}</td>
-            <td>{{s.arrmsg1}}</td>
-
-            <td>{{s.arrmsg2}}</td>
-
         </tr>
     {% endfor %}
     </table>
 </div>
 
+<!-- 모달창 -->
+<div class="container">
+<!-- 모달창 전체 -->
+  <div class="popup-wrap" id="popup">
+    <div class="popup">
+      <div class="popup-head">
+          <span class="head-title">
+            실시간 버스 정보</span>
+      </div>
+
+        <div class="popup-body">
+        <div class="body-content">
+        <!--<a href="/station/renewal"><img style="margin-top:10px; margin-left:15px; float:left; width:45px; height:55px;" src="../../static/img/renewal.png" class="logo"></a>-->
+            <h5 class="today">{{lowStaionByUid[0].repTm1[:16]}}</h5>
+              <div class="body-titlebox">
+                <h3>{{lowStaionByUid[0].stnNm}}</h3>
+              </div>
+          <div class="body-contentbox">
+              <table id="example-table-3" style="width:100%;" border="1" class="table table-bordered table-hover text-center">
+                <tr><th>버스 번호</th>
+                     <th>첫번째 도착예정 버스정보</th>
+                     <th>두번째 도착예정 버스정보</th>
+                </tr>
+                  {% for i in range(lowStaionByUid | length) %}
+                    <tr>
+                        <td>{{lowStaionByUid[i].rtNm}}</td>
+                        <td>{{lowStaionByUid[i].arrmsg1}}</td>
+                        <td>{{lowStaionByUid[i].arrmsg2}}</td>
+
+                    </tr>
+                {% endfor %}
+               </table>
+            </div>
+      <div class="popup-foot">
+        <span class="pop-btn confirm" id="confirm">확인</span>
+      </div>
+    </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- modal 관련 script  example-table-1-->
+<script>
+$(function(){
+  $("#confirm").click(function(){
+      modalClose();
+      //컨펌 이벤트 처리
+  });
+
+  // 테이블1 눌렀을 때 모달창 나오도록 하는 함수
+  $("#example-table-1").click(function(){
+    $("#popup").css('display','flex').hide().fadeIn();
+  });
+
+  // 테이블2 눌렀을 때 모달창 나오도록 하는 함수
+  $("#example-table-2").click(function(){
+    $("#popup").css('display','flex').hide().fadeIn();
+  });
+
+  $("#close").click(function(){
+      modalClose();
+  });
+  // fadeout 처리
+  function modalClose(){
+    $("#popup").fadeOut();
+     location.reload();
+  }
+});
+</script>
+
+
+
 <div name="gpsX" id="gpsX" style="font-size:2px; color:white; text-align:center;">{{station_gps[0].gpsX}}</div>
 <div name="gpsY" id="gpsY" style="font-size:2px; color:white; text-align:center;">{{station_gps[0].gpsY}}</div>
 
+      <!-- 마커 관련 script -->
 <script>
 // 마커를 클릭했을 때 해당 장소의 상세정보를 보여줄 커스텀오버레이입니다
 var placeOverlay = new kakao.maps.CustomOverlay({zIndex:1}),
@@ -111,7 +178,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 // 지도 생성
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// <커스텀 오버레이>
+// 커스텀 오버레이
 // 장소 검색 객체를 생성합니다
 var ps = new kakao.maps.services.Places(map);
 
@@ -306,6 +373,7 @@ map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
+// <마커>
 // 마커가 표시될 위치입니다
 var markerPosition  = new kakao.maps.LatLng(Lat, Lng);
 
