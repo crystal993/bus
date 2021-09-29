@@ -54,7 +54,10 @@
 <div class="row" style="margin-top:30px;">
     <table id="example-table-1" border="1" class="table table-bordered table-hover text-center" style="text-align:center; width=80%;">
 
-    <tr style="text-align:center;"><th>정류소 ID</th><th>정류소명</th><th>정류소번호</th></tr>
+    <tr style="text-align:center;">
+        <th style="text-align:center;">정류소 ID</th>
+        <th style="text-align:center;">정류소명</th>
+        <th style="text-align:center;">정류소번호</th></tr>
     <tr>
         <td>{{lowStaionByUid[0].stId}}</td>
         <td id="stnNm">{{lowStaionByUid[0].stnNm}}</td>
@@ -64,8 +67,12 @@
     </table>
 
     <table id="example-table-2" border="1"  class="table table-bordered table-hover text-center" style="text-align:center; width=80%;">
-        <tr style="text-align:center;"><th>노선ID</th><th>버스 번호</th><th>첫차시간</th>
-            <th>막차 시간</th><th>배차 간격</th>
+        <tr style="text-align:center;">
+            <th style="text-align:center;">노선ID</th>
+            <th style="text-align:center;">버스 번호</th>
+            <th style="text-align:center;">첫차시간</th>
+            <th style="text-align:center;">막차 시간</th>
+            <th style="text-align:center;">배차 간격</th>
         </tr>
     {% for s in lowStaionByUid %}
         <tr>
