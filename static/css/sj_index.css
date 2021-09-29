@@ -15,6 +15,13 @@ h3.form-title {
     margin-top:30px;
     color:#2C2E2E;
     font-size:20px;
+    margin-bottom:30px;
+}
+
+h3.form-title-main {
+    margin-top:30px;
+    color:#2C2E2E;
+    font-size:25px;
 }
 
 section.form-section {
@@ -27,6 +34,14 @@ section.form-section {
 form.search-form {
     float:left;
     width:50%;
+    margin-bottom:60px;
+}
+
+form.search-form-main {
+    margin-top: 100px;
+    margin-right:auto;
+    margin-left:auto;
+    width:60%;
     margin-bottom:60px;
 }
 

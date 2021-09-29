@@ -9,18 +9,7 @@ bp = Blueprint('station', __name__, url_prefix='/station')
 # 정류장과 관련된 기능을 제공해주는 서비스 객체
 service_sj = mo.StationService()
 
-
-@bp.route('/station-gps', methods=['POST'])
-def station_gps():
-    tmX = request.form['tmX']
-    tmY = request.form['tmY']
-    radius = request.form['radius']
-    station_gps: mo.Station_gps = service_sj.getStationByPosInfo(tmX, tmY, radius)
-
-    # bus=bus, 뷰페이지에 전달할 값
-    return render_template('station/stationGps.html', station_gps=station_gps)
-
-
+# 정류소 정보 이름으로 검색해서 조회
 @bp.route('/station-name-gps', methods=['POST'])
 def station_name_gps():
     stSrch = request.form['stSrch']
@@ -34,7 +23,7 @@ def station_name_gps():
     # bus=bus, 뷰페이지에 전달할 값
     return render_template('station/stationGpsByName.html', stationByName=stationByName, station_gps=station_gps, lowStaionByUid=lowStaionByUid)
 
-
+# 교통약자 정류소 정보 조회
 @bp.route('/lowStaionByUid', methods=['POST'])
 def lowStaionByUid():
     arsId = request.form['arsId']
@@ -141,3 +130,25 @@ def route_list():
     strSrch = request.form['strSrch']
     bus: mo.BusRoute = service_sj.getBusRouteList(strSrch=strSrch)
     return render_template('bus/busRouteList.html', bus=bus)
+
+
+# 페이지 이동
+# 교통약자전용 정류소
+@bp.route('/lowStation')
+def lowStation():
+    return render_template('page/lowStationSearch.html')
+
+# 일반정류소
+@bp.route('/normalStation')
+def normalStation():
+    return render_template('page/stationSearch.html')
+
+# 노선 정보
+@bp.route('/routeInfo')
+def routeInfo():
+    return render_template('page/routeSearch.html')
+
+# 경유 정보
+@bp.route('/stopOverInfo')
+def stopOverInfo():
+    return render_template('page/stopOverSearch.html')
