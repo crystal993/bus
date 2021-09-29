@@ -152,3 +152,8 @@ def routeInfo():
 @bp.route('/stopOverInfo')
 def stopOverInfo():
     return render_template('page/stopOverSearch.html')
+
+# 팝업창 새로고침
+@bp.route('/renewal')
+def renewal():
+    return render_template('page/stationGpsByName.html')
